@@ -1,6 +1,6 @@
 {
   "name": "@pimzino/claude-code-spec-workflow",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Automated Kiro-style Spec workflow for Claude Code. Transforms feature ideas into complete implementations through Requirements → Design → Tasks → Implementation.",
   "main": "dist/index.js",
   "bin": {
@@ -47,6 +47,7 @@
     "node": ">=16.0.0"
   },
   "dependencies": {
+    "@pimzino/claude-code-spec-workflow": "file:pimzino-claude-code-spec-workflow-1.0.1.tgz",
     "chalk": "^5.3.0",
     "commander": "^11.1.0",
     "inquirer": "^9.2.12",
