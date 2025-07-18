@@ -50,6 +50,9 @@ coverage/
 # Yarn Integrity file
 .yarn-integrity
 
+# Package tarballs
+*.tgz
+
 # Test files
 *.test.js
 *.spec.js

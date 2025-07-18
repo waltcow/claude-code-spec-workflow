@@ -5,6 +5,20 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.0.3] - 2025-07-18
+
+### Fixed
+- Removed problematic self-dependency that was causing npm installation failures
+- Fixed "ENOENT: no such file or directory" error when running `npx @pimzino/claude-code-spec-workflow`
+- Eliminated circular dependency on `pimzino-claude-code-spec-workflow-1.0.1.tgz` file
+
+### Technical Details
+- Removed erroneous self-reference from package.json dependencies
+- Removed leftover tarball file from project root directory
+- Added `*.tgz` to .gitignore to prevent future tarball commits
+- Package now installs cleanly without looking for non-existent tarball files
+- Resolves npm cache corruption warnings during installation
+
 ## [1.0.2] - 2025-07-18
 
 ### Fixed
