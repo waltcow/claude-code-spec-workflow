@@ -235,7 +235,6 @@ done
 
 - **[Full Documentation](https://github.com/pimzino/claude-code-spec-workflow#readme)**
 - **[Claude Code Docs](https://docs.anthropic.com/claude-code)**
-- **[EARS Format Guide](https://en.wikipedia.org/wiki/Easy_Approach_to_Requirements_Syntax)**
 
 ## 🤝 Contributing
 
