@@ -11,6 +11,9 @@ Create a new feature specification following the spec-driven workflow.
 ## Instructions
 You are helping create a new feature specification. Follow these steps:
 
+**IMPORTANT**: After requirements approval, you MUST run the command generation script:
+\`node .claude/scripts/generate-commands.js {feature-name}\`
+
 1. **Create Directory Structure**
    - Create \`.claude/specs/{feature-name}/\` directory
    - Initialize empty requirements.md, design.md, and tasks.md files
@@ -31,11 +34,12 @@ You are helping create a new feature specification. Follow these steps:
    - Ask: "Do the requirements look good? If so, we can move on to the design."
    - Wait for explicit approval before proceeding
 
-5. **Generate Initial Task Commands** (After approval)
-   - Run the command generation script to create placeholder task commands
-   - Execute: \`node .claude/scripts/generate-commands.js {feature-name}\`
-   - This creates individual task commands in \`.claude/commands/{feature-name}/\`
-   - Note: These will be updated later when tasks.md is created
+5. **Generate Initial Task Commands** (REQUIRED after approval)
+   - **MUST EXECUTE**: \`node .claude/scripts/generate-commands.js {feature-name}\`
+   - **ACTION REQUIRED**: Run this command immediately after requirements approval
+   - **PURPOSE**: Creates individual task commands in \`.claude/commands/{feature-name}/\`
+   - **RESULT**: User can then use \`/{feature-name}-task-1\`, \`/{feature-name}-task-2\`, etc.
+   - **NOTE**: Commands will be updated again when tasks.md is created in /spec-tasks
 
 6. **Rules**
    - Only create ONE spec at a time
@@ -201,6 +205,9 @@ Generate implementation task list based on approved design.
 ## Instructions
 You are working on the tasks phase of the spec workflow.
 
+**IMPORTANT**: After tasks approval, you MUST run the command generation script:
+\`node .claude/scripts/generate-commands.js {feature-name}\`
+
 1. **Prerequisites**
    - Ensure design.md exists and is approved
    - Load both requirements.md and design.md for context
@@ -240,11 +247,12 @@ You are working on the tasks phase of the spec workflow.
    - Make revisions based on feedback
    - Continue until explicit approval
 
-7. **Generate Task Commands** (After approval)
-   - Run the command generation script to create individual task commands
-   - Execute: \`node .claude/scripts/generate-commands.js {feature-name}\`
-   - This creates/updates commands in \`.claude/commands/{feature-name}/\`
-   - Each task gets its own command: \`/{feature-name}-task-{task-id}\`
+7. **Generate Task Commands** (REQUIRED after approval)
+   - **MUST EXECUTE**: \`node .claude/scripts/generate-commands.js {feature-name}\`
+   - **ACTION REQUIRED**: Run this command immediately after tasks approval
+   - **PURPOSE**: Creates/updates individual task commands in \`.claude/commands/{feature-name}/\`
+   - **RESULT**: Each task gets its own command: \`/{feature-name}-task-{task-id}\`
+   - **EXAMPLE**: Creates \`/{feature-name}-task-1\`, \`/{feature-name}-task-2.1\`, etc.
 
 ## Task Structure
 \`\`\`markdown

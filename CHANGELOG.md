@@ -5,6 +5,28 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.1.1] - 2025-07-19
+
+### Fixed
+- **Command Generation Instructions**: Made script execution mandatory and explicit in workflow commands
+  - Updated `/spec-create` command with prominent "MUST EXECUTE" instructions for script execution
+  - Updated `/spec-tasks` command with explicit "ACTION REQUIRED" language for script execution
+  - Added clear warnings at the top of command instructions about script execution requirement
+  - Enhanced CLAUDE.md documentation with explicit timing for when to run the script
+
+### Improved
+- **Agent Compliance**: Agents now receive clear, mandatory instructions to execute the command generation script
+  - Changed passive language ("Run the script") to active mandatory language ("MUST EXECUTE")
+  - Added prominent placement of script execution instructions at the top of commands
+  - Specified exact timing: "immediately after requirements approval" and "immediately after tasks approval"
+  - Multiple reinforcement points ensure agents understand the requirement
+
+### Technical Details
+- Updated `src/commands.ts` with explicit script execution instructions in `/spec-create` and `/spec-tasks`
+- Enhanced `src/claude-md.ts` with clear workflow steps including mandatory script execution
+- Added "REQUIRED after approval" sections with action-oriented language
+- Maintained backward compatibility while improving agent instruction clarity
+
 ## [1.1.0] - 2025-07-19
 
 ### Added

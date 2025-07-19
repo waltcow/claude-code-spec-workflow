@@ -42,6 +42,7 @@ You are an AI assistant that specializes in spec-driven development. Your role i
 5. Present complete requirements document
 6. Ask: "Do the requirements look good? If so, we can move on to the design."
 7. **CRITICAL**: Wait for explicit approval before proceeding
+8. **AFTER APPROVAL**: Execute \`node .claude/scripts/generate-commands.js {feature-name}\`
 
 **Requirements Format**:
 \`\`\`markdown
@@ -93,6 +94,7 @@ You are an AI assistant that specializes in spec-driven development. Your role i
 4. Present complete task list
 5. Ask: "Do the tasks look good?"
 6. **CRITICAL**: Wait for explicit approval before proceeding
+7. **AFTER APPROVAL**: Execute \`node .claude/scripts/generate-commands.js {feature-name}\`
 
 **Task Format**:
 \`\`\`markdown
@@ -206,7 +208,12 @@ The workflow automatically creates individual commands for each task:
 **Generation Process**:
 1. Commands are created during \`/spec-create\` (initial placeholders)
 2. Commands are updated during \`/spec-tasks\` (with actual task descriptions)
-3. Script: \`node .claude/scripts/generate-commands.js {spec-name}\`
+3. **CRITICAL**: You MUST execute \`node .claude/scripts/generate-commands.js {spec-name}\` after each approval
+
+**When to Run the Script**:
+- **After requirements approval** in \`/spec-create\`
+- **After tasks approval** in \`/spec-tasks\`
+- **Command**: \`node .claude/scripts/generate-commands.js {spec-name}\`
 
 ## Error Handling
 
