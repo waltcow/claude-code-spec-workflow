@@ -5,6 +5,15 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.2.1] - 2025-07-19
+
+### Fixed
+- **Windows Script Parsing**: Fixed task parsing logic in Windows batch script
+  - Replaced complex regex patterns with arithmetic validation for task IDs
+  - Fixed parsing of hierarchical task numbering (1, 2.1, 2.2, etc.)
+  - Removed Unicode emoji characters for clean, professional output
+  - Ensured proper task detection using simplified string matching
+
 ## [1.2.0] - 2025-07-19
 
 ### Added
@@ -34,12 +43,20 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - All documentation updated to reference new platform-specific approach
   - Clear deprecation warnings guide users to new system
 
+### Fixed
+- **Windows Script Parsing**: Fixed task parsing logic in Windows batch script
+  - Replaced complex regex patterns with arithmetic validation for task IDs
+  - Fixed parsing of hierarchical task numbering (1, 2.1, 2.2, etc.)
+  - Removed Unicode emoji characters for clean, professional output
+  - Ensured proper task detection using simplified string matching
+
 ### Technical Details
 - **Setup Process**: Modified `createScripts()` to generate four files (Windows, Unix, launcher, documentation)
 - **File Permissions**: Automatically sets execute permissions for shell scripts on Unix-like systems
 - **Error Handling**: Graceful OS detection with clear error messages for unsupported platforms
 - **Test Coverage**: Updated test suite to verify all platform-specific scripts are created correctly
 - **Backward Compatibility**: Smooth transition with comprehensive migration documentation
+- **Windows Compatibility**: Improved batch script reliability with simplified validation logic
 
 ## [1.1.2] - 2025-07-19
 

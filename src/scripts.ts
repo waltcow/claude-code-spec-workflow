@@ -48,10 +48,10 @@ for /f "usebackq delims=" %%a in ("%TASKS_FILE%") do (
 )
 
 echo.
-echo ✅ Generated !TASK_COUNT! task commands for spec: %SPEC_NAME%
-echo 📁 Commands created in: .claude\\commands\\%SPEC_NAME%\\
+echo Generated !TASK_COUNT! task commands for spec: %SPEC_NAME%
+echo Commands created in: .claude\\commands\\%SPEC_NAME%\\
 echo.
-echo 📋 Generated commands:
+echo Generated commands:
 for /f "usebackq delims=" %%a in ("%TASKS_FILE%") do (
     set "LINE=%%a"
     call :ShowTaskCommand "!LINE!"
@@ -62,19 +62,18 @@ goto :eof
 :ParseTaskLine
 set "TASK_LINE=%~1"
 REM Match task lines like "- [ ] 1. Task description" or "- [ ] 2.1 Task description"
-echo %TASK_LINE% | findstr /r "^[ ]*-[ ]*\\[[ ]*\\][ ]*[0-9][0-9.]*[ ]*\\..*" >nul
+REM Use a simpler approach - check if line starts with "- [ ]" and contains a number
+echo !TASK_LINE! | findstr /b /c:"- [ ]" >nul
 if !errorlevel! equ 0 (
-    REM Extract task ID and description
-    for /f "tokens=1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20 delims= " %%b in ("!TASK_LINE!") do (
-        set "TEMP_LINE=%%c %%d %%e %%f %%g %%h %%i %%j %%k %%l %%m %%n %%o %%p %%q %%r %%s %%t %%u %%v"
-        call :ExtractTaskInfo "!TEMP_LINE!"
-    )
+    REM Extract everything after "- [ ] "
+    set "AFTER_CHECKBOX=!TASK_LINE:~6!"
+    call :ExtractTaskInfo "!AFTER_CHECKBOX!"
 )
 goto :eof
 
 :ExtractTaskInfo
 set "REMAINING=%~1"
-REM Find the task ID (number with optional dots)
+REM Find the first token which should be the task ID
 for /f "tokens=1,* delims= " %%x in ("!REMAINING!") do (
     set "POTENTIAL_ID=%%x"
     set "REST=%%y"
@@ -82,13 +81,24 @@ for /f "tokens=1,* delims= " %%x in ("!REMAINING!") do (
     REM Remove trailing dot if present
     if "!POTENTIAL_ID:~-1!"=="." set "POTENTIAL_ID=!POTENTIAL_ID:~0,-1!"
 
-    REM Check if it's a valid task ID (contains only digits and dots)
-    echo !POTENTIAL_ID! | findstr /r "^[0-9][0-9.]*$" >nul
+    REM Check if it looks like a task ID (starts with digit, may contain dots)
+    echo !POTENTIAL_ID! | findstr /r "^[0-9]" >nul
     if !errorlevel! equ 0 (
-        set "TASK_ID=!POTENTIAL_ID!"
-        set "TASK_DESC=!REST!"
-        call :GenerateTaskCommand "!TASK_ID!" "!TASK_DESC!"
-        set /a TASK_COUNT+=1
+        REM Simple validation - check if it matches pattern like 1, 1.2, 1.2.3 etc
+        REM Replace dots with spaces and check each part is numeric
+        set "ID_PARTS=!POTENTIAL_ID:.= !"
+        set "VALID_ID=1"
+        for %%p in (!ID_PARTS!) do (
+            REM Use arithmetic test to check if part is numeric
+            set /a "TEST_NUM=%%p" 2>nul
+            if !errorlevel! neq 0 set "VALID_ID=0"
+        )
+        if !VALID_ID! equ 1 (
+            set "TASK_ID=!POTENTIAL_ID!"
+            set "TASK_DESC=!REST!"
+            call :GenerateTaskCommand "!TASK_ID!" "!TASK_DESC!"
+            set /a TASK_COUNT+=1
+        )
     )
 )
 goto :eof
@@ -144,12 +154,11 @@ goto :eof
 
 :ShowTaskCommand
 set "TASK_LINE=%~1"
-echo %TASK_LINE% | findstr /r "^[ ]*-[ ]*\\[[ ]*\\][ ]*[0-9][0-9.]*[ ]*\\..*" >nul
+REM Use same logic as ParseTaskLine
+echo !TASK_LINE! | findstr /b /c:"- [ ]" >nul
 if !errorlevel! equ 0 (
-    for /f "tokens=1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20 delims= " %%b in ("!TASK_LINE!") do (
-        set "TEMP_LINE=%%c %%d %%e %%f %%g %%h %%i %%j %%k %%l %%m %%n %%o %%p %%q %%r %%s %%t %%u %%v"
-        call :ShowTaskInfo "!TEMP_LINE!"
-    )
+    set "AFTER_CHECKBOX=!TASK_LINE:~6!"
+    call :ShowTaskInfo "!AFTER_CHECKBOX!"
 )
 goto :eof
 
@@ -161,9 +170,20 @@ for /f "tokens=1,* delims= " %%x in ("!REMAINING!") do (
 
     if "!POTENTIAL_ID:~-1!"=="." set "POTENTIAL_ID=!POTENTIAL_ID:~0,-1!"
 
-    echo !POTENTIAL_ID! | findstr /r "^[0-9][0-9.]*$" >nul
+    REM Check if it looks like a task ID
+    echo !POTENTIAL_ID! | findstr /r "^[0-9]" >nul
     if !errorlevel! equ 0 (
-        echo   /%SPEC_NAME%-task-!POTENTIAL_ID! - !REST!
+        REM Simple validation - check if it matches pattern like 1, 1.2, 1.2.3 etc
+        set "ID_PARTS=!POTENTIAL_ID:.= !"
+        set "VALID_ID=1"
+        for %%p in (!ID_PARTS!) do (
+            REM Use arithmetic test to check if part is numeric
+            set /a "TEST_NUM=%%p" 2>nul
+            if !errorlevel! neq 0 set "VALID_ID=0"
+        )
+        if !VALID_ID! equ 1 (
+            echo   /%SPEC_NAME%-task-!POTENTIAL_ID! - !REST!
+        )
     )
 )
 goto :eof
@@ -268,10 +288,10 @@ while IFS= read -r line; do
 done < "$TASKS_FILE"
 
 echo
-echo "✅ Generated $TASK_COUNT task commands for spec: $SPEC_NAME"
-echo "📁 Commands created in: .claude/commands/$SPEC_NAME/"
+echo "Generated $TASK_COUNT task commands for spec: $SPEC_NAME"
+echo "Commands created in: .claude/commands/$SPEC_NAME/"
 echo
-echo "📋 Generated commands:"
+echo "Generated commands:"
 
 # Show generated commands
 while IFS= read -r line; do
