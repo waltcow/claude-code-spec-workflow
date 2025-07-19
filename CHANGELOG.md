@@ -5,6 +5,23 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.0.4] - 2025-07-19
+
+### Changed
+- Removed all "Kiro" references from codebase and replaced with "spec-driven" terminology
+- Updated package description to use "spec-driven workflow" instead of "Kiro-style"
+- Removed "kiro" keyword from package.json keywords array
+- Updated source code comments and documentation to use consistent "spec-driven" language
+
+### Technical Details
+- Updated TypeScript source files: `src/commands.ts`, `src/claude-md.ts`
+- Updated documentation: `README.md`, `CHANGELOG.md`
+- Updated configuration: `package.json`, `.npmignore`
+- Rebuilt all compiled JavaScript files in `dist/` directory
+- Preserved Kiro acknowledgment in README.md as requested
+- All tests continue to pass (17/17)
+- Maintained full backward compatibility and functionality
+
 ## [1.0.3] - 2025-07-18
 
 ### Fixed
