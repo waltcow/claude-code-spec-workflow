@@ -27,6 +27,30 @@ You are an AI assistant that specializes in spec-driven development. Your role i
 | \`/spec-status\` | Show current spec status | \`/spec-status user-auth\` |
 | \`/spec-list\` | List all specs | \`/spec-list\` |
 
+## Workflow Sequence
+
+**CRITICAL**: Follow this exact sequence - do NOT skip steps or run scripts early:
+
+1. **Requirements Phase** (\`/spec-create\`)
+   - Create requirements.md
+   - Get user approval
+   - **DO NOT** run any scripts
+   - Proceed to design phase
+
+2. **Design Phase** (\`/spec-design\`)
+   - Create design.md
+   - Get user approval
+   - **DO NOT** run any scripts
+   - Proceed to tasks phase
+
+3. **Tasks Phase** (\`/spec-tasks\`)
+   - Create tasks.md
+   - Get user approval
+   - **ONLY THEN** run: \`node .claude/scripts/generate-commands.js {spec-name}\`
+
+4. **Implementation Phase** (\`/spec-execute\` or generated commands)
+   - Use generated task commands or traditional /spec-execute
+
 ## Detailed Workflow Process
 
 ### Phase 1: Requirements Gathering (\`/spec-requirements\`)
@@ -42,7 +66,7 @@ You are an AI assistant that specializes in spec-driven development. Your role i
 5. Present complete requirements document
 6. Ask: "Do the requirements look good? If so, we can move on to the design."
 7. **CRITICAL**: Wait for explicit approval before proceeding
-8. **AFTER APPROVAL**: Execute \`node .claude/scripts/generate-commands.js {feature-name}\`
+8. **NEXT PHASE**: Proceed to \`/spec-design\` (DO NOT run scripts yet)
 
 **Requirements Format**:
 \`\`\`markdown
@@ -95,6 +119,7 @@ You are an AI assistant that specializes in spec-driven development. Your role i
 5. Ask: "Do the tasks look good?"
 6. **CRITICAL**: Wait for explicit approval before proceeding
 7. **AFTER APPROVAL**: Execute \`node .claude/scripts/generate-commands.js {feature-name}\`
+8. **IMPORTANT**: Do NOT edit the script - run it exactly as provided
 
 **Task Format**:
 \`\`\`markdown
@@ -137,6 +162,14 @@ You are an AI assistant that specializes in spec-driven development. Your role i
 - Validate against requirements
 - Follow existing code patterns
 - Confirm task completion status to user
+
+## CRITICAL: Script Usage Rules
+
+**DO NOT EDIT THE SCRIPT**: The script at \`.claude/scripts/generate-commands.js\` is complete and functional.
+- **DO NOT** modify the script content
+- **DO NOT** try to "improve" or "customize" the script
+- **JUST RUN IT**: \`node .claude/scripts/generate-commands.js {spec-name}\`
+- **TIMING**: Only run after tasks.md is approved
 
 ## Critical Workflow Rules
 
@@ -206,14 +239,16 @@ The workflow automatically creates individual commands for each task:
 - **Clear purpose**: Each command shows exactly what task it executes
 
 **Generation Process**:
-1. Commands are created during \`/spec-create\` (initial placeholders)
-2. Commands are updated during \`/spec-tasks\` (with actual task descriptions)
-3. **CRITICAL**: You MUST execute \`node .claude/scripts/generate-commands.js {spec-name}\` after each approval
+1. **Requirements Phase**: Create requirements.md (NO scripts)
+2. **Design Phase**: Create design.md (NO scripts)
+3. **Tasks Phase**: Create tasks.md (NO scripts)
+4. **ONLY AFTER tasks approval**: Execute \`node .claude/scripts/generate-commands.js {spec-name}\`
 
 **When to Run the Script**:
-- **After requirements approval** in \`/spec-create\`
-- **After tasks approval** in \`/spec-tasks\`
+- **ONLY** after tasks are approved in \`/spec-tasks\`
+- **NOT** during requirements or design phases
 - **Command**: \`node .claude/scripts/generate-commands.js {spec-name}\`
+- **IMPORTANT**: Do NOT edit the script - run it as-is
 
 ## Error Handling
 

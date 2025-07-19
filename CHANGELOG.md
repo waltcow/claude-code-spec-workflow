@@ -5,6 +5,34 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.1.2] - 2025-07-19
+
+### Fixed
+- **Workflow Sequence Clarity**: Clarified exact workflow sequence to prevent script execution at wrong times
+  - Updated `/spec-create` to explicitly state "DO NOT run scripts during requirements phase"
+  - Updated `/spec-tasks` to clearly indicate script should ONLY run after tasks approval
+  - Added prominent workflow sequence documentation: Requirements → Design → Tasks → Generate Commands
+  - Added explicit warnings against editing the command generation script
+
+### Improved
+- **Agent Instruction Clarity**: Eliminated confusion about when to run the command generation script
+  - Removed premature script execution instructions from requirements phase
+  - Added clear "DO NOT" statements to prevent early script execution
+  - Specified exact timing: "ONLY after tasks are approved"
+  - Added warnings against script modification attempts
+
+### Documentation
+- **Workflow Sequence**: Added clear step-by-step workflow sequence in CLAUDE.md
+- **Script Usage Rules**: Added dedicated section explaining proper script usage
+- **Timing Clarity**: Made it crystal clear that scripts run ONLY after tasks approval
+- **Anti-Editing Warnings**: Added explicit instructions not to modify the generation script
+
+### Technical Details
+- Updated `src/commands.ts` with corrected workflow sequence for both `/spec-create` and `/spec-tasks`
+- Enhanced `src/claude-md.ts` with prominent workflow sequence and script usage rules
+- Removed confusing early script execution instructions from requirements phase
+- Added multiple reinforcement points about proper script timing and usage
+
 ## [1.1.1] - 2025-07-19
 
 ### Fixed
