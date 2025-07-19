@@ -1,7 +1,7 @@
 export function getSpecCreateCommand(): string {
   return `# Spec Create Command
 
-Create a new feature specification following the Kiro spec workflow.
+Create a new feature specification following the spec-driven workflow.
 
 ## Usage
 \`\`\`
@@ -393,15 +393,15 @@ Display a comprehensive list of all specs in the project.
 3. **Output Format**
    \`\`\`
    📋 Project Specs Overview
-   
+
    1. user-authentication (Complete)
       Phase: Implementation (7/8 tasks)
       Last updated: 2025-01-15
-      
+
    2. data-export (In Progress)
       Phase: Design
       Last updated: 2025-01-14
-      
+
    3. notification-system (Planning)
       Phase: Requirements
       Last updated: 2025-01-13

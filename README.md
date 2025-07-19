@@ -3,7 +3,7 @@
 [![npm version](https://badge.fury.io/js/@pimzino%2Fclaude-code-spec-workflow.svg)](https://badge.fury.io/js/@pimzino%2Fclaude-code-spec-workflow)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-> Automated Kiro-style Spec workflow for Claude Code. Transform feature ideas into complete implementations through **Requirements → Design → Tasks → Implementation**.
+> Automated spec-driven workflow for Claude Code. Transform feature ideas into complete implementations through **Requirements → Design → Tasks → Implementation**.
 
 ## 🚀 Quick Start
 

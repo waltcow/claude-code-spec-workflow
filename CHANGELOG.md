@@ -39,7 +39,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 - Initial release of Claude Code Spec Workflow
-- Automated Kiro-style specification workflow for Claude Code
+- Automated spec-driven workflow for Claude Code
 - Complete Requirements → Design → Tasks → Implementation process
 - 7 slash commands for workflow automation:
   - `/spec-create` - Create new feature specifications

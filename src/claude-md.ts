@@ -1,7 +1,7 @@
 export function getClaudeMdContent(): string {
   return `# Spec Workflow
 
-This project uses the automated Spec workflow for feature development, based on the Kiro methodology. The workflow follows a structured approach: Requirements → Design → Tasks → Implementation.
+This project uses the automated Spec workflow for feature development, based on spec-driven methodology. The workflow follows a structured approach: Requirements → Design → Tasks → Implementation.
 
 ## Workflow Philosophy
 
