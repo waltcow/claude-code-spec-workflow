@@ -12,7 +12,7 @@ const program = new Command();
 program
   .name('claude-spec-setup')
   .description('Set up Claude Code Spec Workflow in your project')
-  .version('1.0.0');
+  .version('1.1.0');
 
 program
   .option('-p, --project <path>', 'Project directory', process.cwd())
@@ -72,7 +72,9 @@ program
         console.log(chalk.cyan('This will create:'));
         console.log(chalk.gray('  📁 .claude/ directory structure'));
         console.log(chalk.gray('  📝 7 slash commands for spec workflow'));
+        console.log(chalk.gray('  🤖 Auto-generated task commands'));
         console.log(chalk.gray('  📋 Document templates'));
+        console.log(chalk.gray('  🔧 Command generation scripts'));
         console.log(chalk.gray('  ⚙️  Configuration files'));
         console.log(chalk.gray('  📖 CLAUDE.md with workflow instructions'));
         console.log();
@@ -107,6 +109,7 @@ program
       console.log(chalk.gray('  /spec-design                 - Generate design'));
       console.log(chalk.gray('  /spec-tasks                  - Generate tasks'));
       console.log(chalk.gray('  /spec-execute <task-id>      - Execute tasks'));
+      console.log(chalk.gray('  /{spec-name}-task-{id}       - Auto-generated task commands'));
       console.log(chalk.gray('  /spec-status                 - Show status'));
       console.log(chalk.gray('  /spec-list                   - List all specs'));
       console.log();

@@ -5,6 +5,40 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.1.0] - 2025-07-19
+
+### Added
+- **Auto-Generated Task Commands**: Individual commands are now automatically created for each task in a spec
+  - Commands like `/user-auth-task-1`, `/user-auth-task-2.1` are generated automatically
+  - Each command calls `/spec-execute {task-id} {spec-name}` with proper parameters
+  - Commands are organized in spec-specific folders: `.claude/commands/{spec-name}/`
+- **Command Generation Script**: New script at `.claude/scripts/generate-commands.js`
+  - Parses `tasks.md` files and creates individual task commands
+  - Supports hierarchical task numbering (1, 2, 2.1, 2.2, etc.)
+  - Called automatically during `/spec-create` and `/spec-tasks` workflows
+- **Enhanced Directory Structure**: Added `.claude/scripts/` directory for automation scripts
+- **Improved Workflow Commands**: Updated `/spec-create` and `/spec-tasks` to generate task commands
+
+### Changed
+- **Command Organization**: Commands are now organized with main workflow commands at root level and spec-specific commands in subfolders
+- **CLI Output**: Added mention of auto-generated task commands in setup success message
+- **Documentation**: Updated README.md, CLAUDE.md, and CLI help to explain new command structure
+- **Directory Structure**: Extended setup to create `.claude/scripts/` directory
+
+### Enhanced
+- **User Experience**: Easier task execution with shorter, more intuitive command names
+- **Auto-Completion**: Claude Code can now suggest spec-specific commands
+- **Organization**: Better command organization with clear separation between main workflow and task-specific commands
+- **Backward Compatibility**: All existing commands continue to work unchanged
+
+### Technical Details
+- Added `src/scripts.ts` with command generation functionality
+- Updated `src/setup.ts` to create scripts directory and files
+- Enhanced `src/commands.ts` with instructions for command generation
+- Updated `src/claude-md.ts` with new command documentation
+- Added comprehensive tests for new functionality
+- All 18 tests pass including new script creation tests
+
 ## [1.0.4] - 2025-07-19
 
 ### Changed

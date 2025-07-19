@@ -49,8 +49,10 @@ npx claude-spec-setup
 The setup automatically creates:
 - **📁 .claude/ directory structure** with all necessary files
 - **📝 7 slash commands** for the complete workflow
+- **🤖 Auto-generated task commands** for each spec (NEW!)
 - **📋 Document templates** for consistent formatting
 - **⚙️ Configuration files** for workflow automation
+- **🔧 Command generation scripts** for dynamic task commands
 - **📖 CLAUDE.md** with comprehensive workflow instructions
 
 ## 🔄 Workflow Overview
@@ -92,8 +94,12 @@ After setup, use these commands in Claude Code:
 # Generate implementation tasks
 /spec-tasks
 
-# Execute specific tasks
-/spec-execute 1
+# Execute specific tasks (two ways):
+/spec-execute 1                    # Traditional way
+/user-authentication-task-1       # New auto-generated command
+
+# Execute subtasks
+/user-authentication-task-2.1     # Auto-generated for subtasks
 
 # Check status
 /spec-status
@@ -101,6 +107,14 @@ After setup, use these commands in Claude Code:
 # List all specs
 /spec-list
 ```
+
+### 🆕 Auto-Generated Task Commands
+
+The workflow now automatically creates individual commands for each task:
+- **Easier execution**: `/user-auth-task-1` instead of `/spec-execute 1 user-authentication`
+- **Better organization**: Commands grouped by spec in `.claude/commands/{spec-name}/`
+- **Auto-completion**: Claude Code can suggest spec-specific commands
+- **Clear purpose**: Each command shows exactly what task it executes
 
 ## 📊 Command Line Options
 
@@ -155,7 +169,13 @@ your-project/
 │   │   ├── spec-tasks.md
 │   │   ├── spec-execute.md
 │   │   ├── spec-status.md
-│   │   └── spec-list.md
+│   │   ├── spec-list.md
+│   │   └── {spec-name}/              # Auto-generated (NEW!)
+│   │       ├── task-1.md
+│   │       ├── task-2.md
+│   │       └── task-2.1.md
+│   ├── scripts/                      # NEW!
+│   │   └── generate-commands.js
 │   ├── templates/
 │   │   ├── requirements-template.md
 │   │   ├── design-template.md

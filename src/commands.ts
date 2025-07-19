@@ -31,11 +31,18 @@ You are helping create a new feature specification. Follow these steps:
    - Ask: "Do the requirements look good? If so, we can move on to the design."
    - Wait for explicit approval before proceeding
 
-5. **Rules**
+5. **Generate Initial Task Commands** (After approval)
+   - Run the command generation script to create placeholder task commands
+   - Execute: \`node .claude/scripts/generate-commands.js {feature-name}\`
+   - This creates individual task commands in \`.claude/commands/{feature-name}/\`
+   - Note: These will be updated later when tasks.md is created
+
+6. **Rules**
    - Only create ONE spec at a time
    - Always use kebab-case for feature names
    - Follow the exact EARS format for acceptance criteria
    - Do not proceed without explicit user approval
+   - Generate task commands after requirements approval
 
 ## Example
 \`\`\`
@@ -233,6 +240,12 @@ You are working on the tasks phase of the spec workflow.
    - Make revisions based on feedback
    - Continue until explicit approval
 
+7. **Generate Task Commands** (After approval)
+   - Run the command generation script to create individual task commands
+   - Execute: \`node .claude/scripts/generate-commands.js {feature-name}\`
+   - This creates/updates commands in \`.claude/commands/{feature-name}/\`
+   - Each task gets its own command: \`/{feature-name}-task-{task-id}\`
+
 ## Task Structure
 \`\`\`markdown
 # Implementation Plan
@@ -250,7 +263,10 @@ You are working on the tasks phase of the spec workflow.
 \`\`\`
 
 ## Next Phase
-After approval, use \`/spec-execute\` to implement tasks.
+After approval and command generation, you can:
+- Use \`/spec-execute\` to implement tasks
+- Use individual task commands: \`/{feature-name}-task-1\`, \`/{feature-name}-task-2\`, etc.
+- Check progress with \`/spec-status {feature-name}\`
 `;
 }
 

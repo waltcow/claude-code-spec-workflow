@@ -23,18 +23,20 @@ describe('SpecWorkflowSetup', () => {
     const commandsDir = join(claudeDir, 'commands');
     const specsDir = join(claudeDir, 'specs');
     const templatesDir = join(claudeDir, 'templates');
+    const scriptsDir = join(claudeDir, 'scripts');
 
     await expect(fs.access(claudeDir)).resolves.not.toThrow();
     await expect(fs.access(commandsDir)).resolves.not.toThrow();
     await expect(fs.access(specsDir)).resolves.not.toThrow();
     await expect(fs.access(templatesDir)).resolves.not.toThrow();
+    await expect(fs.access(scriptsDir)).resolves.not.toThrow();
   });
 
   test('should detect existing claude directory', async () => {
     expect(await setup.claudeDirectoryExists()).toBe(false);
-    
+
     await setup.setupDirectories();
-    
+
     expect(await setup.claudeDirectoryExists()).toBe(true);
   });
 
@@ -56,7 +58,7 @@ describe('SpecWorkflowSetup', () => {
     for (const command of expectedCommands) {
       const commandPath = join(commandsDir, command);
       await expect(fs.access(commandPath)).resolves.not.toThrow();
-      
+
       const content = await fs.readFile(commandPath, 'utf-8');
       expect(content.length).toBeGreaterThan(0);
       expect(content).toContain('# Spec');
@@ -77,9 +79,28 @@ describe('SpecWorkflowSetup', () => {
     for (const template of expectedTemplates) {
       const templatePath = join(templatesDir, template);
       await expect(fs.access(templatePath)).resolves.not.toThrow();
-      
+
       const content = await fs.readFile(templatePath, 'utf-8');
       expect(content.length).toBeGreaterThan(0);
+    }
+  });
+
+  test('should create scripts', async () => {
+    await setup.setupDirectories();
+    await setup.createScripts();
+
+    const scriptsDir = join(tempDir, '.claude', 'scripts');
+    const expectedScripts = [
+      'generate-commands.js'
+    ];
+
+    for (const script of expectedScripts) {
+      const scriptPath = join(scriptsDir, script);
+      await expect(fs.access(scriptPath)).resolves.not.toThrow();
+
+      const content = await fs.readFile(scriptPath, 'utf-8');
+      expect(content.length).toBeGreaterThan(0);
+      expect(content).toContain('generateTaskCommands');
     }
   });
 
@@ -89,10 +110,10 @@ describe('SpecWorkflowSetup', () => {
 
     const configPath = join(tempDir, '.claude', 'spec-config.json');
     await expect(fs.access(configPath)).resolves.not.toThrow();
-    
+
     const content = await fs.readFile(configPath, 'utf-8');
     const config = JSON.parse(content);
-    
+
     expect(config).toHaveProperty('spec_workflow');
     expect(config.spec_workflow).toHaveProperty('version');
     expect(config.spec_workflow).toHaveProperty('auto_create_directories');
@@ -104,7 +125,7 @@ describe('SpecWorkflowSetup', () => {
 
     const claudeMdPath = join(tempDir, 'CLAUDE.md');
     await expect(fs.access(claudeMdPath)).resolves.not.toThrow();
-    
+
     const content = await fs.readFile(claudeMdPath, 'utf-8');
     expect(content).toContain('# Spec Workflow');
     expect(content).toContain('/spec-create');

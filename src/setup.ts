@@ -15,6 +15,7 @@ import {
   getTasksTemplate
 } from './templates';
 import { getClaudeMdContent } from './claude-md';
+import { getCommandGenerationScript } from './scripts';
 
 export class SpecWorkflowSetup {
   private projectRoot: string;
@@ -22,6 +23,7 @@ export class SpecWorkflowSetup {
   private commandsDir: string;
   private specsDir: string;
   private templatesDir: string;
+  private scriptsDir: string;
 
   constructor(projectRoot: string = process.cwd()) {
     this.projectRoot = projectRoot;
@@ -29,6 +31,7 @@ export class SpecWorkflowSetup {
     this.commandsDir = join(this.claudeDir, 'commands');
     this.specsDir = join(this.claudeDir, 'specs');
     this.templatesDir = join(this.claudeDir, 'templates');
+    this.scriptsDir = join(this.claudeDir, 'scripts');
   }
 
   async claudeDirectoryExists(): Promise<boolean> {
@@ -45,7 +48,8 @@ export class SpecWorkflowSetup {
       this.claudeDir,
       this.commandsDir,
       this.specsDir,
-      this.templatesDir
+      this.templatesDir,
+      this.scriptsDir
     ];
 
     for (const dir of directories) {
@@ -80,6 +84,17 @@ export class SpecWorkflowSetup {
     for (const [templateName, templateContent] of Object.entries(templates)) {
       const templateFile = join(this.templatesDir, templateName);
       await fs.writeFile(templateFile, templateContent, 'utf-8');
+    }
+  }
+
+  async createScripts(): Promise<void> {
+    const scripts = {
+      'generate-commands.js': getCommandGenerationScript()
+    };
+
+    for (const [scriptName, scriptContent] of Object.entries(scripts)) {
+      const scriptFile = join(this.scriptsDir, scriptName);
+      await fs.writeFile(scriptFile, scriptContent, 'utf-8');
     }
   }
 
@@ -154,6 +169,7 @@ export class SpecWorkflowSetup {
     await this.setupDirectories();
     await this.createSlashCommands();
     await this.createTemplates();
+    await this.createScripts();
     await this.createConfigFile();
     await this.createClaudeMd();
   }

@@ -23,6 +23,7 @@ You are an AI assistant that specializes in spec-driven development. Your role i
 | \`/spec-design\` | Generate design document | \`/spec-design\` |
 | \`/spec-tasks\` | Generate implementation tasks | \`/spec-tasks\` |
 | \`/spec-execute <task-id>\` | Execute specific task | \`/spec-execute 1\` |
+| \`/{spec-name}-task-{id}\` | Execute specific task (auto-generated) | \`/user-auth-task-1\` |
 | \`/spec-status\` | Show current spec status | \`/spec-status user-auth\` |
 | \`/spec-list\` | List all specs | \`/spec-list\` |
 
@@ -108,8 +109,12 @@ You are an AI assistant that specializes in spec-driven development. Your role i
 - User training or documentation
 - Business process changes
 
-### Phase 4: Implementation (\`/spec-execute\`)
+### Phase 4: Implementation (\`/spec-execute\` or auto-generated commands)
 **Your Role**: Execute tasks systematically with validation
+
+**Two Ways to Execute Tasks**:
+1. **Traditional**: \`/spec-execute 1 feature-name\`
+2. **Auto-generated**: \`/feature-name-task-1\` (created automatically)
 
 **Process**:
 1. Load requirements.md, design.md, and tasks.md for context
@@ -176,11 +181,32 @@ The workflow automatically creates and manages:
 │       ├── design.md         # Technical architecture and design
 │       └── tasks.md          # Implementation task breakdown
 ├── commands/
-│   └── spec-*.md            # Slash command definitions
+│   ├── spec-*.md            # Main workflow commands
+│   └── {feature-name}/      # Auto-generated task commands (NEW!)
+│       ├── task-1.md
+│       ├── task-2.md
+│       └── task-2.1.md
+├── scripts/                 # Command generation scripts (NEW!)
+│   └── generate-commands.js
 ├── templates/
 │   └── *-template.md        # Document templates
 └── spec-config.json         # Workflow configuration
 \`\`\`
+
+## Auto-Generated Task Commands
+
+The workflow automatically creates individual commands for each task:
+
+**Benefits**:
+- **Easier execution**: Type \`/user-auth-task-1\` instead of \`/spec-execute 1 user-authentication\`
+- **Better organization**: Commands grouped by spec in separate folders
+- **Auto-completion**: Claude Code can suggest spec-specific commands
+- **Clear purpose**: Each command shows exactly what task it executes
+
+**Generation Process**:
+1. Commands are created during \`/spec-create\` (initial placeholders)
+2. Commands are updated during \`/spec-tasks\` (with actual task descriptions)
+3. Script: \`node .claude/scripts/generate-commands.js {spec-name}\`
 
 ## Error Handling
 
