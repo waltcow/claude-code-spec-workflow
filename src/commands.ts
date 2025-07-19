@@ -249,11 +249,12 @@ You are working on the tasks phase of the spec workflow.
 
 7. **Generate Task Commands** (ONLY after tasks approval)
    - **WAIT**: Do not run script until user explicitly approves tasks
-   - **THEN EXECUTE**: \`node .claude/scripts/generate-commands.js {feature-name}\`
+   - **THEN EXECUTE**: \`./.claude/scripts/generate-commands-launcher.sh {feature-name}\`
    - **PURPOSE**: Creates individual task commands in \`.claude/commands/{feature-name}/\`
    - **RESULT**: Each task gets its own command: \`/{feature-name}-task-{task-id}\`
    - **EXAMPLE**: Creates \`/{feature-name}-task-1\`, \`/{feature-name}-task-2.1\`, etc.
-   - **IMPORTANT**: Do NOT edit the script - just run it as-is
+   - **IMPORTANT**: Do NOT edit the scripts - just run them as-is
+   - **PLATFORM**: Automatically detects OS and runs appropriate script (Windows/macOS/Linux)
 
 ## Task Structure
 \`\`\`markdown

@@ -5,6 +5,42 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.2.0] - 2025-07-19
+
+### Added
+- **Platform-Specific Command Generation**: Replaced JavaScript-based script with platform-specific alternatives
+  - Added `generate-commands.bat` for Windows systems with native batch scripting
+  - Added `generate-commands.sh` for macOS and Linux systems with bash scripting
+  - Added `generate-commands-launcher.sh` for automatic OS detection and script selection
+  - Added comprehensive script documentation in `.claude/scripts/README.md`
+
+### Changed
+- **Cross-Platform Compatibility**: Eliminated Node.js dependency for command generation
+  - Agents now use `./.claude/scripts/generate-commands-launcher.sh {spec-name}` instead of `node .claude/scripts/generate-commands.js {spec-name}`
+  - Automatic OS detection ensures the correct script runs on each platform (Windows/macOS/Linux)
+  - Maintains all existing functionality: task parsing, hierarchical numbering, command file generation
+  - Updated all workflow documentation and command references
+
+### Improved
+- **Conflict Prevention**: Platform-specific scripts avoid potential JavaScript conflicts
+  - No more Node.js version compatibility issues or runtime conflicts
+  - Reduced dependency on external runtime environments
+  - Better integration with native shell environments
+  - Faster execution using native platform commands
+
+### Deprecated
+- **JavaScript Command Generation**: The `generate-commands.js` script is no longer created
+  - Legacy function `getCommandGenerationScript()` now returns migration instructions
+  - All documentation updated to reference new platform-specific approach
+  - Clear deprecation warnings guide users to new system
+
+### Technical Details
+- **Setup Process**: Modified `createScripts()` to generate four files (Windows, Unix, launcher, documentation)
+- **File Permissions**: Automatically sets execute permissions for shell scripts on Unix-like systems
+- **Error Handling**: Graceful OS detection with clear error messages for unsupported platforms
+- **Test Coverage**: Updated test suite to verify all platform-specific scripts are created correctly
+- **Backward Compatibility**: Smooth transition with comprehensive migration documentation
+
 ## [1.1.2] - 2025-07-19
 
 ### Fixed

@@ -91,7 +91,10 @@ describe('SpecWorkflowSetup', () => {
 
     const scriptsDir = join(tempDir, '.claude', 'scripts');
     const expectedScripts = [
-      'generate-commands.js'
+      'generate-commands.bat',
+      'generate-commands.sh',
+      'generate-commands-launcher.sh',
+      'README.md'
     ];
 
     for (const script of expectedScripts) {
@@ -100,7 +103,21 @@ describe('SpecWorkflowSetup', () => {
 
       const content = await fs.readFile(scriptPath, 'utf-8');
       expect(content.length).toBeGreaterThan(0);
-      expect(content).toContain('generateTaskCommands');
+
+      // Check for appropriate content based on script type
+      if (script === 'generate-commands.bat') {
+        expect(content).toContain('@echo off');
+        expect(content).toContain('Command Generation Script for Claude Code Spec Workflow (Windows)');
+      } else if (script === 'generate-commands.sh') {
+        expect(content).toContain('#!/bin/bash');
+        expect(content).toContain('Command Generation Script for Claude Code Spec Workflow (Unix/Linux/macOS)');
+      } else if (script === 'generate-commands-launcher.sh') {
+        expect(content).toContain('#!/bin/bash');
+        expect(content).toContain('OS Detection and Command Generation Launcher');
+      } else if (script === 'README.md') {
+        expect(content).toContain('Command Generation Instructions');
+        expect(content).toContain('Platform-Specific Script Execution');
+      }
     }
   });
 

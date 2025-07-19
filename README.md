@@ -175,7 +175,10 @@ your-project/
 │   │       ├── task-2.md
 │   │       └── task-2.1.md
 │   ├── scripts/                      # NEW!
-│   │   └── generate-commands.js
+│   │   ├── generate-commands.bat     # Windows script
+│   │   ├── generate-commands.sh      # macOS/Linux script
+│   │   ├── generate-commands-launcher.sh  # OS detection launcher
+│   │   └── README.md                 # Script documentation
 │   ├── templates/
 │   │   ├── requirements-template.md
 │   │   ├── design-template.md

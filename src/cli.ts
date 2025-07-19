@@ -74,7 +74,7 @@ program
         console.log(chalk.gray('  📝 7 slash commands for spec workflow'));
         console.log(chalk.gray('  🤖 Auto-generated task commands'));
         console.log(chalk.gray('  📋 Document templates'));
-        console.log(chalk.gray('  🔧 Command generation scripts'));
+        console.log(chalk.gray('  🔧 Platform-specific command generation scripts'));
         console.log(chalk.gray('  ⚙️  Configuration files'));
         console.log(chalk.gray('  📖 CLAUDE.md with workflow instructions'));
         console.log();

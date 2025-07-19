@@ -46,7 +46,7 @@ You are an AI assistant that specializes in spec-driven development. Your role i
 3. **Tasks Phase** (\`/spec-tasks\`)
    - Create tasks.md
    - Get user approval
-   - **ONLY THEN** run: \`node .claude/scripts/generate-commands.js {spec-name}\`
+   - **ONLY THEN** run: \`./.claude/scripts/generate-commands-launcher.sh {spec-name}\`
 
 4. **Implementation Phase** (\`/spec-execute\` or generated commands)
    - Use generated task commands or traditional /spec-execute
@@ -118,8 +118,8 @@ You are an AI assistant that specializes in spec-driven development. Your role i
 4. Present complete task list
 5. Ask: "Do the tasks look good?"
 6. **CRITICAL**: Wait for explicit approval before proceeding
-7. **AFTER APPROVAL**: Execute \`node .claude/scripts/generate-commands.js {feature-name}\`
-8. **IMPORTANT**: Do NOT edit the script - run it exactly as provided
+7. **AFTER APPROVAL**: Execute \`./.claude/scripts/generate-commands-launcher.sh {feature-name}\`
+8. **IMPORTANT**: Do NOT edit the scripts - run them exactly as provided
 
 **Task Format**:
 \`\`\`markdown
@@ -165,11 +165,12 @@ You are an AI assistant that specializes in spec-driven development. Your role i
 
 ## CRITICAL: Script Usage Rules
 
-**DO NOT EDIT THE SCRIPT**: The script at \`.claude/scripts/generate-commands.js\` is complete and functional.
-- **DO NOT** modify the script content
-- **DO NOT** try to "improve" or "customize" the script
-- **JUST RUN IT**: \`node .claude/scripts/generate-commands.js {spec-name}\`
+**DO NOT EDIT THE SCRIPTS**: The platform-specific scripts in \`.claude/scripts/\` are complete and functional.
+- **DO NOT** modify any script content
+- **DO NOT** try to "improve" or "customize" the scripts
+- **JUST RUN THE LAUNCHER**: \`./.claude/scripts/generate-commands-launcher.sh {spec-name}\`
 - **TIMING**: Only run after tasks.md is approved
+- **PLATFORM DETECTION**: The launcher automatically detects your OS and runs the appropriate script
 
 ## Critical Workflow Rules
 
@@ -242,13 +243,14 @@ The workflow automatically creates individual commands for each task:
 1. **Requirements Phase**: Create requirements.md (NO scripts)
 2. **Design Phase**: Create design.md (NO scripts)
 3. **Tasks Phase**: Create tasks.md (NO scripts)
-4. **ONLY AFTER tasks approval**: Execute \`node .claude/scripts/generate-commands.js {spec-name}\`
+4. **ONLY AFTER tasks approval**: Execute \`./.claude/scripts/generate-commands-launcher.sh {spec-name}\`
 
-**When to Run the Script**:
+**When to Run the Scripts**:
 - **ONLY** after tasks are approved in \`/spec-tasks\`
 - **NOT** during requirements or design phases
-- **Command**: \`node .claude/scripts/generate-commands.js {spec-name}\`
-- **IMPORTANT**: Do NOT edit the script - run it as-is
+- **Command**: \`./.claude/scripts/generate-commands-launcher.sh {spec-name}\`
+- **IMPORTANT**: Do NOT edit the scripts - run them as-is
+- **PLATFORM SUPPORT**: Works on Windows, macOS, and Linux automatically
 
 ## Error Handling
 

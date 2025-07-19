@@ -15,7 +15,12 @@ import {
   getTasksTemplate
 } from './templates';
 import { getClaudeMdContent } from './claude-md';
-import { getCommandGenerationScript } from './scripts';
+import {
+  getWindowsCommandGenerationScript,
+  getUnixCommandGenerationScript,
+  getOSDetectionScript,
+  getCommandGenerationInstructions
+} from './scripts';
 
 export class SpecWorkflowSetup {
   private projectRoot: string;
@@ -89,12 +94,25 @@ export class SpecWorkflowSetup {
 
   async createScripts(): Promise<void> {
     const scripts = {
-      'generate-commands.js': getCommandGenerationScript()
+      'generate-commands.bat': getWindowsCommandGenerationScript(),
+      'generate-commands.sh': getUnixCommandGenerationScript(),
+      'generate-commands-launcher.sh': getOSDetectionScript(),
+      'README.md': getCommandGenerationInstructions()
     };
 
     for (const [scriptName, scriptContent] of Object.entries(scripts)) {
       const scriptFile = join(this.scriptsDir, scriptName);
       await fs.writeFile(scriptFile, scriptContent, 'utf-8');
+
+      // Make shell scripts executable on Unix-like systems
+      if (scriptName.endsWith('.sh')) {
+        try {
+          await fs.chmod(scriptFile, 0o755);
+        } catch (error) {
+          // Ignore chmod errors on Windows
+          console.warn(`Warning: Could not set execute permissions for ${scriptName}`);
+        }
+      }
     }
   }
 
