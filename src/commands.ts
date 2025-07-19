@@ -292,10 +292,11 @@ You are executing implementation tasks from the spec workflow.
    - Ensure integration with existing code
 
 5. **Completion**
-   - Mark task as complete in tasks.md
-   - Update execution log
+   - **CRITICAL**: Mark task as complete in tasks.md by changing [ ] to [x]
+   - Update execution log with completion details
    - Stop and wait for user review
    - DO NOT automatically proceed to next task
+   - Confirm task completion status to user
 
 ## Task Selection
 If no task-id specified:
@@ -311,9 +312,11 @@ If no task-id specified:
 
 ## Important Rules
 - Only execute ONE task at a time
+- **ALWAYS** mark completed tasks as [x] in tasks.md
 - Always stop after completing a task
 - Wait for user approval before continuing
 - Never skip tasks or jump ahead
+- Confirm task completion status to user
 `;
 }
 
