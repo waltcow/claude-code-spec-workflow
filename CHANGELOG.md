@@ -163,7 +163,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 - Removed problematic self-dependency that was causing npm installation failures
-- Fixed "ENOENT: no such file or directory" error when running `npx @pimzino/claude-code-spec-workflow`
+- Fixed "ENOENT: no such file or directory" error when running `npx @waltcow/claude-code-spec-workflow`
 - Eliminated circular dependency on `pimzino-claude-code-spec-workflow-1.0.1.tgz` file
 
 ### Technical Details
@@ -182,7 +182,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 - Fixed NPX execution issue by adding package name as binary entry
-- NPX command `npx @pimzino/claude-code-spec-workflow` now works correctly
+- NPX command `npx @waltcow/claude-code-spec-workflow` now works correctly
 - Added `claude-code-spec-workflow` binary alongside existing `claude-spec-setup`
 
 ### Technical Details
@@ -244,9 +244,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ```
 
 ### Installation Options
-- NPX (recommended): `npx @pimzino/claude-code-spec-workflow`
-- Global: `npm install -g @pimzino/claude-code-spec-workflow`
-- Local: `npm install --save-dev @pimzino/claude-code-spec-workflow`
+- NPX (recommended): `npx @waltcow/claude-code-spec-workflow`
+- Global: `npm install -g @waltcow/claude-code-spec-workflow`
+- Local: `npm install --save-dev @waltcow/claude-code-spec-workflow`
 
 ### Documentation
 - Comprehensive README with examples

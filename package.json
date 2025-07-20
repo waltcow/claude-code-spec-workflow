@@ -1,5 +1,5 @@
 {
-  "name": "@pimzino/claude-code-spec-workflow",
+  "name": "@waltcow/claude-code-spec-workflow",
   "version": "1.2.1",
   "description": "Automated spec-driven workflow for Claude Code. Transforms feature ideas into complete implementations through Requirements → Design → Tasks → Implementation.",
   "main": "dist/index.js",
@@ -26,16 +26,16 @@
     "automation",
     "development-workflow"
   ],
-  "author": "Pimzino",
+  "author": "waltcow",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/pimzino/claude-code-spec-workflow.git"
+    "url": "git+https://github.com/waltcow/claude-code-spec-workflow.git"
   },
   "bugs": {
-    "url": "https://github.com/pimzino/claude-code-spec-workflow/issues"
+    "url": "https://github.com/waltcow/claude-code-spec-workflow/issues"
   },
-  "homepage": "https://github.com/pimzino/claude-code-spec-workflow#readme",
+  "homepage": "https://github.com/waltcow/claude-code-spec-workflow#readme",
   "files": [
     "dist",
     "README.md",
