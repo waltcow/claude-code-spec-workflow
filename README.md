@@ -3,161 +3,161 @@
 [![npm version](https://badge.fury.io/js/@waltcow%2Fclaude-code-spec-workflow.svg)](https://badge.fury.io/js/@waltcow%2Fclaude-code-spec-workflow)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-> Automated spec-driven workflow for Claude Code. Transform feature ideas into complete implementations through **Requirements → Design → Tasks → Implementation**.
+> Claude Code 的自动化规范驱动工作流。通过 **需求 → 设计 → 任务 → 实现** 流程，将功能想法转化为完整的实现。
 
-## 🚀 Quick Start
+## 🚀 快速开始
 
-Install and run in any project directory:
+在任何项目目录中安装并运行：
 
 ```bash
 npx @waltcow/claude-code-spec-workflow
 ```
 
-That's it! The workflow will be automatically set up in your project.
+就这么简单！工作流将自动在您的项目中设置完成。
 
-## 📦 Installation Options
+## 📦 安装选项
 
-### NPX (Recommended)
+### NPX（推荐）
 ```bash
-# Run once in your project directory
+# 在项目目录中运行一次
 npx @waltcow/claude-code-spec-workflow
 
-# Test the setup
+# 测试设置
 npx @waltcow/claude-code-spec-workflow test
 ```
 
-### Global Installation
+### 全局安装
 ```bash
-# Install globally
+# 全局安装
 npm install -g @waltcow/claude-code-spec-workflow
 
-# Use anywhere
+# 在任何地方使用
 claude-spec-setup
 ```
 
-### Local Installation
+### 本地安装
 ```bash
-# Install as dev dependency
+# 作为开发依赖安装
 npm install --save-dev @waltcow/claude-code-spec-workflow
 
-# Run via package.json script
+# 通过 package.json 脚本运行
 npx claude-spec-setup
 ```
 
-## 🎯 What It Does
+## 🎯 功能概述
 
-The setup automatically creates:
-- **📁 .claude/ directory structure** with all necessary files
-- **📝 7 slash commands** for the complete workflow
-- **🤖 Auto-generated task commands** for each spec (NEW!)
-- **📋 Document templates** for consistent formatting
-- **⚙️ Configuration files** for workflow automation
-- **🔧 Command generation scripts** for dynamic task commands
-- **📖 CLAUDE.md** with comprehensive workflow instructions
+设置自动创建：
+- **📁 .claude/ 目录结构** 包含所有必要文件
+- **📝 7 个斜杠命令** 用于完整工作流
+- **🤖 自动生成的任务命令** 为每个规范生成（新功能！）
+- **📋 文档模板** 确保格式一致性
+- **⚙️ 配置文件** 用于工作流自动化
+- **🔧 命令生成脚本** 用于动态任务命令
+- **📖 CLAUDE.md** 包含全面的工作流说明
 
-## 🔄 Workflow Overview
+## 🔄 工作流概览
 
-### 1. **Requirements Phase** (`/spec-requirements`)
-- Generates user stories and acceptance criteria
-- Uses EARS format (WHEN/IF/THEN statements)
-- Ensures comprehensive requirement coverage
+### 1. **需求阶段** (`/spec-requirements`)
+- 生成用户故事和验收标准
+- 使用 EARS 格式（WHEN/IF/THEN 语句）
+- 确保需求覆盖全面
 
-### 2. **Design Phase** (`/spec-design`)
-- Creates technical architecture and design
-- Includes Mermaid diagrams for visualization
-- Plans components, interfaces, and data models
+### 2. **设计阶段** (`/spec-design`)
+- 创建技术架构和设计
+- 包含 Mermaid 图表进行可视化
+- 规划组件、接口和数据模型
 
-### 3. **Tasks Phase** (`/spec-tasks`)
-- Breaks design into atomic coding tasks
-- References specific requirements
-- Focuses on test-driven development
+### 3. **任务阶段** (`/spec-tasks`)
+- 将设计分解为原子编码任务
+- 引用特定需求
+- 专注于测试驱动开发
 
-### 4. **Implementation Phase** (`/spec-execute`)
-- Executes tasks systematically
-- Validates against requirements
-- Ensures quality and consistency
+### 4. **实现阶段** (`/spec-execute`)
+- 系统地执行任务
+- 根据需求进行验证
+- 确保质量和一致性
 
-## 🛠️ Usage
+## 🛠️ 使用方法
 
-After setup, use these commands in Claude Code:
+设置后，在 Claude Code 中使用这些命令：
 
 ```bash
-# Create a new feature spec
-/spec-create user-authentication "Secure login system"
+# 创建新功能规范
+/spec-create user-authentication "安全登录系统"
 
-# Generate requirements document
+# 生成需求文档
 /spec-requirements
 
-# Create design document
+# 创建设计文档
 /spec-design
 
-# Generate implementation tasks
+# 生成实现任务
 /spec-tasks
 
-# Execute specific tasks (two ways):
-/spec-execute 1                    # Traditional way
-/user-authentication-task-1       # New auto-generated command
+# 执行特定任务（两种方式）：
+/spec-execute 1                    # 传统方式
+/user-authentication-task-1       # 新的自动生成命令
 
-# Execute subtasks
-/user-authentication-task-2.1     # Auto-generated for subtasks
+# 执行子任务
+/user-authentication-task-2.1     # 为子任务自动生成
 
-# Check status
+# 检查状态
 /spec-status
 
-# List all specs
+# 列出所有规范
 /spec-list
 ```
 
-### 🆕 Auto-Generated Task Commands
+### 🆕 自动生成的任务命令
 
-The workflow now automatically creates individual commands for each task:
-- **Easier execution**: `/user-auth-task-1` instead of `/spec-execute 1 user-authentication`
-- **Better organization**: Commands grouped by spec in `.claude/commands/{spec-name}/`
-- **Auto-completion**: Claude Code can suggest spec-specific commands
-- **Clear purpose**: Each command shows exactly what task it executes
+工作流现在会自动为每个任务创建单独的命令：
+- **更简单的执行**：`/user-auth-task-1` 而不是 `/spec-execute 1 user-authentication`
+- **更好的组织**：命令按规范分组在 `.claude/commands/{spec-name}/` 中
+- **自动补全**：Claude Code 可以建议特定规范的命令
+- **明确的目的**：每个命令都清楚地显示它执行的任务
 
-## 📊 Command Line Options
+## 📊 命令行选项
 
 ```bash
-# Setup in current directory
+# 在当前目录设置
 npx @waltcow/claude-code-spec-workflow
 
-# Setup in specific directory
+# 在特定目录设置
 npx @waltcow/claude-code-spec-workflow --project /path/to/project
 
-# Force overwrite existing files
+# 强制覆盖现有文件
 npx @waltcow/claude-code-spec-workflow --force
 
-# Skip confirmation prompts
+# 跳过确认提示
 npx @waltcow/claude-code-spec-workflow --yes
 
-# Test the setup
+# 测试设置
 npx @waltcow/claude-code-spec-workflow test
 ```
 
-## 🎨 Features
+## 🎨 特性
 
-### ✅ **Zero Configuration**
-- Works out of the box with any project
-- Auto-detects project type (Node.js, Python, Java, etc.)
-- Validates Claude Code installation
+### ✅ **零配置**
+- 开箱即用，适用于任何项目
+- 自动检测项目类型（Node.js、Python、Java 等）
+- 验证 Claude Code 安装
 
-### ✅ **Interactive Setup**
-- Beautiful CLI with progress indicators
-- Confirmation prompts for safety
-- Helpful error messages and guidance
+### ✅ **交互式设置**
+- 美观的 CLI 界面和进度指示器
+- 安全性确认提示
+- 有用的错误消息和指导
 
-### ✅ **Smart File Management**
-- Preserves existing `CLAUDE.md` content
-- Creates comprehensive directory structure
-- Includes all necessary templates and configs
+### ✅ **智能文件管理**
+- 保留现有的 `CLAUDE.md` 内容
+- 创建全面的目录结构
+- 包含所有必要的模板和配置
 
-### ✅ **Professional Quality**
-- TypeScript implementation
-- Comprehensive error handling
-- Follows npm best practices
+### ✅ **专业品质**
+- TypeScript 实现
+- 全面的错误处理
+- 遵循 npm 最佳实践
 
-## 🏗️ Project Structure After Setup
+## 🏗️ 设置后的项目结构
 
 ```
 your-project/
@@ -170,114 +170,114 @@ your-project/
 │   │   ├── spec-execute.md
 │   │   ├── spec-status.md
 │   │   ├── spec-list.md
-│   │   └── {spec-name}/              # Auto-generated (NEW!)
+│   │   └── {spec-name}/              # 自动生成（新功能！）
 │   │       ├── task-1.md
 │   │       ├── task-2.md
 │   │       └── task-2.1.md
-│   ├── scripts/                      # NEW!
-│   │   ├── generate-commands.bat     # Windows script
-│   │   ├── generate-commands.sh      # macOS/Linux script
-│   │   ├── generate-commands-launcher.sh  # OS detection launcher
-│   │   └── README.md                 # Script documentation
+│   ├── scripts/                      # 新功能！
+│   │   ├── generate-commands.bat     # Windows 脚本
+│   │   ├── generate-commands.sh      # macOS/Linux 脚本
+│   │   ├── generate-commands-launcher.sh  # 操作系统检测启动器
+│   │   └── README.md                 # 脚本文档
 │   ├── templates/
 │   │   ├── requirements-template.md
 │   │   ├── design-template.md
 │   │   └── tasks-template.md
 │   ├── specs/
-│   │   └── (your specs will be created here)
+│   │   └── (您的规范将在此创建)
 │   └── spec-config.json
-└── CLAUDE.md (created/updated)
+└── CLAUDE.md (创建/更新)
 ```
 
-## 🧪 Testing
+## 🧪 测试
 
-The package includes a built-in test command:
+该包包含内置测试命令：
 
 ```bash
-# Test setup in temporary directory
+# 在临时目录中测试设置
 npx @waltcow/claude-code-spec-workflow test
 ```
 
-## 📋 Requirements
+## 📋 要求
 
-- **Node.js** 16.0.0 or higher
-- **Claude Code** installed and configured
-- Any project directory
+- **Node.js** 16.0.0 或更高版本
+- **Claude Code** 已安装并配置
+- 任何项目目录
 
-## 🔧 Troubleshooting
+## 🔧 故障排除
 
-### Common Issues
+### 常见问题
 
-**❓ Command not found after NPX**
+**❓ NPX 后找不到命令**
 ```bash
-# Make sure you're using the correct package name
+# 确保使用正确的包名
 npx @waltcow/claude-code-spec-workflow
 ```
 
-**❓ Setup fails with permission errors**
+**❓ 设置失败并出现权限错误**
 ```bash
-# Try with different directory permissions
+# 尝试使用不同的目录权限
 npx @waltcow/claude-code-spec-workflow --project ~/my-project
 ```
 
-**❓ Claude Code not detected**
+**❓ 未检测到 Claude Code**
 ```bash
-# Install Claude Code first
+# 首先安装 Claude Code
 npm install -g @anthropic-ai/claude-code
 ```
 
-### Debug Information
+### 调试信息
 
 ```bash
-# Show verbose output
+# 显示详细输出
 DEBUG=* npx @waltcow/claude-code-spec-workflow
 
-# Check package version
+# 检查包版本
 npx @waltcow/claude-code-spec-workflow --version
 ```
 
-## 🌟 Examples
+## 🌟 示例
 
-### Basic Usage
+### 基本用法
 ```bash
 cd my-awesome-project
 npx @waltcow/claude-code-spec-workflow
 claude
-# Type: /spec-create user-dashboard "User profile management"
+# 输入：/spec-create user-dashboard "用户资料管理"
 ```
 
-### Advanced Usage
+### 高级用法
 ```bash
-# Setup multiple projects
+# 设置多个项目
 for dir in project1 project2 project3; do
   npx @waltcow/claude-code-spec-workflow --project $dir --yes
 done
 ```
 
-## 📚 Documentation
+## 📚 文档
 
-- **[Full Documentation](https://github.com/waltcow/claude-code-spec-workflow#readme)**
-- **[Claude Code Docs](https://docs.anthropic.com/claude-code)**
+- **[完整文档](https://github.com/waltcow/claude-code-spec-workflow#readme)**
+- **[Claude Code 文档](https://docs.anthropic.com/claude-code)**
 
-## 🤝 Contributing
+## 🤝 贡献
 
-Contributions are welcome! Please see our [Contributing Guide](https://github.com/waltcow/claude-code-spec-workflow/blob/main/CONTRIBUTING.md).
+欢迎贡献！请查看我们的[贡献指南](https://github.com/waltcow/claude-code-spec-workflow/blob/main/CONTRIBUTING.md)。
 
-## 📄 License
+## 📄 许可证
 
-MIT License - see [LICENSE](https://github.com/waltcow/claude-code-spec-workflow/blob/main/LICENSE) for details.
+MIT 许可证 - 详情请见 [LICENSE](https://github.com/waltcow/claude-code-spec-workflow/blob/main/LICENSE)。
 
-## 🏷️ Changelog
+## 🏷️ 更新日志
 
-See [CHANGELOG.md](https://github.com/waltcow/claude-code-spec-workflow/blob/main/CHANGELOG.md) for version history.
+版本历史请见 [CHANGELOG.md](https://github.com/waltcow/claude-code-spec-workflow/blob/main/CHANGELOG.md)。
 
 ---
 
-**Transform your development workflow with automated spec-driven development!** 🚀
+**通过自动化规范驱动开发转变您的开发工作流！** 🚀
 
-Made with ❤️ by [waltcow](https://github.com/waltcow)
+由 [waltcow](https://github.com/waltcow) 用 ❤️ 制作
 
-## Acknowledgments
+## 致谢
 
 - [Claude Code](https://docs.anthropic.com/claude-code)
 - [Kiro](https://kiro.dev/)
